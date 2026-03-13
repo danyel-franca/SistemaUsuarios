@@ -21,7 +21,15 @@
                                     <div class="mb-3">
                                         <label for="senha" class="form-label">Senha</label>
                                         <input type="password" class="form-control" id="senha"
-                                            placeholder="Digite sua senha" />
+                                            placeholder="Digite sua senha"
+                                            #senhaInput 
+                                            (input) = "validarSenha(senhaInput.value)"
+                                            />
+                                            <label [ngStyle] = "{color: regraMinimoCaractere ? 'green' : 'red'}"><i>A senha deve ter no mínimo 8 caracteres</i></label>
+                                            <label [ngStyle] = "{color: regraMaximoCaractere ? 'green' : 'red'}"><i>A senha deve ter no máximo 16 caracteres</i></label>
+                                            <label [ngStyle] = "{color: regraLetraMaiuscula ? 'green' : 'red'}"><i>A senha deve conter ao menos uma letra maiúscula</i></label>
+                                            <label [ngStyle] = "{color: regraCaractereEspecial ? 'green' : 'red'}"><i>A senha deve conter ao menos um caractere especial</i></label>
+                                            <label [ngStyle] = "{color: regraNumerosLetras ? 'green' : 'red'}"><i>A senha deve conter numeros e letras</i></label>
                                     </div>
                                     <div class="mb-3">
                                         <label for="telefone" class="form-label">Telefone</label>
