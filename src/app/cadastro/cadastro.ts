@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EnderecoService } from '../services/endereco.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -11,12 +12,21 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } 
 
 export class Cadastro {
 
+private enderecoService = inject(EnderecoService);
+
 passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
 
 form = new FormGroup({
   nome : new FormControl('', [Validators.required]),
   email : new FormControl('', [Validators.required, Validators.email]),
-  senha : new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)])
+  senha : new FormControl('', [Validators.required, Validators.pattern(this.passwordRegex)]),
+  cep : new FormControl(''),
+  logradouro : new FormControl(''),
+  numero : new FormControl(''),
+  complemento : new FormControl(''),
+  uf : new FormControl({value : '', disabled: true}),
+  bairro : new FormControl({value : '', disabled: true}),
+  localidade : new FormControl({value : '', disabled: true}),
 });
 
 validatePassword() {
@@ -54,5 +64,17 @@ onSubmit(){
     this.regraLetraMaiuscula = rxMaiuscula.test(senha);
     this.regraCaractereEspecial = rxEspecial.test(senha);
     this.regraNumerosLetras = rxNumero.test(senha) && rxLetra.test(senha);
+  }
+
+  get buscarCep() {
+    const cep = this.form.get('cep')?.value ?? '';
+    this.enderecoService.getEndereco(cep).subscribe(endereco => {
+      this.form.get('logradouro')?.setValue(endereco.logradouro);
+      this.form.get('uf')?.setValue(endereco.uf);
+      this.form.get('bairro')?.setValue(endereco.bairro);
+      this.form.get('localidade')?.setValue(endereco.localidade);
+    });
+
+    return true;
   }
 }
