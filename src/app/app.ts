@@ -1,10 +1,10 @@
 import { Component, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Cadastro } from './cadastro/cadastro';
+import { ListaUsuarios } from './lista-usuarios/lista-usuarios';
 
 @Component({
   selector: 'app-root',
-  imports: [Cadastro],
+  imports: [ListaUsuarios],
   templateUrl: './app.html',
   styleUrl: './app.css',
   standalone: true
