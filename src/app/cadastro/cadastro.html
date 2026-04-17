@@ -5,7 +5,7 @@
                 <div class="card-body">
                     <h2 class="text-center mb-4">Cadastro de Usuário</h2>
                     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                        
+
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome completo</label>
                             <input type="text" class="form-control" id="nome" placeholder="Digite seu nome completo" formControlName="nome" />
@@ -85,6 +85,7 @@
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                         </div>
                     </form>
+                    <button class = "btn btn-secondary" routerLink = "/lista-usuarios">Lista Usuários</button>
                 </div>
             </div>
         </div>

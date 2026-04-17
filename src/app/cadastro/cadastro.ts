@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EnderecoService } from '../services/endereco.service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-cadastro',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css',
 })
@@ -50,7 +51,7 @@ onSubmit(){
   regraNumerosLetras: Boolean = false;
 
   validarSenha(senha: string): void {
-    
+
     // Regex das regras
     const rxMin8 = /^.{8,}$/; // Mínimo de 8 caracteres
     const rxMax16 = /^.{0,16}$/; // Máximo de 16 caracteres
